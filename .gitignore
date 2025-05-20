@@ -1,14 +1,15 @@
-venv
+*.a
+*.config
+*.onnx
+*.ort
+*.pyc
+.DS_Store
 .venv
 .vscode/settings.json
-*.ort
-*.onnx
-model/*
-*.config
-*.pyc
-libs
-onnxruntime/
-onnxruntime.xcframework
-*.a
 __pycache__
+libs
+model/*
+onnxruntime.xcframework
+onnxruntime/
+venv
 

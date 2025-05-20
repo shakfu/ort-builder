@@ -32,17 +32,21 @@ CMake v2.6+
 
 windows
 ```bash
-$ py -3 -m venv venv
-$ source ./venv/Scripts/activate`
+py -3 -m venv venv
+source ./venv/Scripts/activate`
 ```
 
 mac/linux
 ```bash
-$ uv add -r requirements.txt
-$ source ./.venv/bin/activate`
+uv add -r requirements.txt
+source ./.venv/bin/activate`
 ```
 
-3. Run `$ ./convert-model-to-ort.sh model.onnx`
+3. Convert `.onnx` model to `.ort` 
+
+```sh
+./scripts/convert-model-to-ort.sh model.onnx
+```
 
 This converts the `.onnx` file to `.ort` and produces a `.config` file which slims the `onnxruntime` library build in the next step. It also serializes the `.ort` format model to C++ source code, which can be used to bake the model into your app binary. If the model
 is large this might not be a great solution, and it might be better to locate the `.ort` file at runtime.
@@ -50,13 +54,13 @@ is large this might not be a great solution, and it might be better to locate th
 4. Build customized onnx runtime static libraries
 
 ```sh
-$ ./build-mac.sh
+./scripts/build-mac.sh
 ```
 
 for a universal macos static library or
 
 ```sh
-$ ./build-mac-native.sh
+./scripts/build-mac-native.sh
 ```
 
 for a native macos static library.
@@ -64,18 +68,18 @@ for a native macos static library.
 for ios,
 
 ```sh
-$ ./build-ios.sh
-$ ./build-ios-simulator.sh
+./scripts/build-ios.sh
+./scripts/build-ios-simulator.sh
 ```
 
 for windows,
 
 ```sh
-$ ./build-xcframework.sh
+./scripts/build-xcframework.sh
 ```
 
 **Note:** windows static lib builds can get very large due to the LTO/LTCG settings in onnxruntime. You can turn that off by applying the change in ltcg_patch_for_windows.patch to the onnxruntime repo. Due to different MSVC runtimes for Debug and Release builds, we need to build two binaries for windows.
 
 ```sh
-$ ./build-win.sh
+./scripts/build-win.sh
 ```
